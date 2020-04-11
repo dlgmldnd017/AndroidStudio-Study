@@ -1,0 +1,94 @@
+package com.example.a;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.a.R;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class MainActivity extends AppCompatActivity {
+    EditText editText;
+    TextView textView;
+
+
+    Handler handler = new Handler();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editText = findViewById(R.id.editText);
+        textView = findViewById(R.id.textView);
+
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String urlStr = editText.getText().toString();
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        request(urlStr);
+                    }
+                }).start();
+            }
+        });
+    }
+
+    public void request(String urlStr) {
+        StringBuilder output = new StringBuilder();
+        try {
+            URL url = new URL(urlStr);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();      //HttpURLConnection 객체 만들기.
+            if (conn != null) {
+                conn.setConnectTimeout(10000);      //연결 대기 시간을 설정하는 것으로 10초 동안 연결되기를 기다린다는 의미.
+                conn.setRequestMethod("GET");       //요청 방식 GET 과 POST 방식을 선택.
+                conn.setDoInput(true);      //이 객체의 입력이 가능하도록 만들어 주는 것.
+
+                int resCode = conn.getResponseCode();       //getResponseCode() 메서드를 호출한 시점부터 내부적으로 웹서버에 페이지를 요청하는 과정을 수행한다.
+                //Toast.makeText(getApplicationContext(),resCode,Toast.LENGTH_LONG).show();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));       //입력 데이터를 받기 위한 Reader 객체 생성하기.
+                String line = null;
+                while (true) {
+                    line = reader.readLine();
+                    if (line == null) {
+                        break;
+                    }
+
+                    output.append(line + "\n");
+                }
+                reader.close();
+                conn.disconnect();
+            }
+        } catch (Exception ex) {
+            println("예외 발생함 : " + ex.toString());
+        }
+
+        println("응답 -> " + output.toString());
+    }
+
+    public void println(final String data) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                textView.append(data + "\n");
+            }
+        });
+
+    }
+
+}
