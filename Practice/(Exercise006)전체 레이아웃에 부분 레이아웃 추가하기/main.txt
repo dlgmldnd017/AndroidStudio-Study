@@ -1,0 +1,36 @@
+package com.example.myapplication;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class xei extends AppCompatActivity {
+    LinearLayout on1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.ex);
+
+        on1 = (LinearLayout) findViewById(R.id.con);
+
+        Button button = (Button) findViewById(R.id.on1);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                inflater.inflate(R.layout.ex2, on1, true);      //객체화 되었다.
+
+                CheckBox checkBox = (CheckBox) on1.findViewById(R.id.checkBox);
+                checkBox.setText("로딩되었어요");
+            }
+        });
+
+    }
+}
