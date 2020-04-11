@@ -1,0 +1,1 @@
+Snackbar.make(v,"스낵바 입니다.",Snackbar.LENGTH_LONG).show();
