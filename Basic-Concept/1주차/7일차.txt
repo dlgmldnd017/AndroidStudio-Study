@@ -1,0 +1,209 @@
+※상대 레이아웃
+- 부모 컨테이너나 다른 뷰와의 상대적인 위치를 이용해 뷰의 위치를 결정할 수 있도록 한다.
+
+- 주의할 점은 id 속성 값을 지정할 때는 + 으로 한다면 오류가 발생하므로,  "@+id/button" 으로 하는 것이 좋다.
+
+- layout_above 의 속성은 해당하는 뷰 id의 위에 배치가 된다.
+
+- layout_below 의 속성은 해당하는 뷰 id의 아래에 배치가 된다.
+
+
+- 상대 레이아웃에서 부모 컨테이너와의 상대적 위치를 이용하는 속성들은 다음과 같다.
+
+	1. layout_alignParentTop: 부모 컨테이너의 위쪽과 뷰의 위쪽을 맞춤
+	
+	2. layout_alignParentBottom: 부모 컨테이너의 아래쪽과 뷰의 아래쪽을 맞춤
+	
+	3. layout_alignParentLeft: 부모 컨테이너의 왼쪽과 뷰의 왼쪽을 맞춤
+	
+	4. layout_alignParentRight: 부모 컨테이너의 오른쪽과 뷰의 오른쪽을 맞춤
+	
+	5. layout_centerVertical: 부모 컨테이너의 수평 방향 중앙에 배치함
+	
+	6. layout_centerHorizental: 부모 컨테이너의 수직 방향 중앙에 배치함
+	
+	7. layout_centerParent: 부모 컨테이너의 수평과 수직 방향 중앙에 배치함
+
+
+- 상대 레이아웃에서 다른 뷰와의 상대적 위치를 이용하는 속성들은 다음과 같다.
+
+	1. layout_ toLeftOf: 지정한 뷰의 왼쪽에 배치함
+	
+	2. layout_toRightOf: 지정한 뷰의 오른쪽에 배치함
+	
+	3. layout_alignTop: 지정한 뷰의 위쪽과 맞춤
+	
+	4. layout_alignBottom: 지정한 뷰의 아래쪽과 맞춤
+
+	5. layout_alignLeft: 지정한 뷰의 왼쪽과 맞춤
+
+	6. layout_alignRight: 지정한 뷰의 오른쪽과 맞춤
+
+	7. layout_alignBaseline: 지정한 뷰와 내용물의 아래쪽 기준선을 맞춤
+
+
+※테이블 레이아웃
+- 흔히 사용하는 표나 엑셀 시트와 같은 형태로 화면을 구성하는 레이아웃이다.
+
+- TableRow의 개수의 의미는 행의 갯수이다.
+
+- 레이아웃의 높이와 넓이는 자체로 match_parent 이지만, 실제로 높이만 wrap_content이다. 반대로 넓이는 한 행을 만들어야하기에
+match_parent이다.
+
+- 만약 tablerow를 만들고 버튼을 다 넣고 했을 때 오른쪽 여유 공간이 남는다면, strechColumns 속성을 추가하면 된다.
+
+	예를 들면 한 행에 3개의 버튼이 들어간다고 했을 때, 우리는 최상위 태그에 android:strechColumns: "0,1,2"를 추가하면
+	된다.
+
+또한 shrinkColumns 라는 속성이 있는데, 자동 축소가 가능하도록하며 부모 컨테이너의 폭에 맞추도록 각 열의 폭을 강제로 축소한다.
+
+- <TableRow> 태그에는 layout_colums, layout_span 속성이 있는데, colums는 세로, span은 가로의 뜻으로, 숫자로 지정하는데,
+만약 span이  "3"이라는 값을 가지면, 가로의 크기 3칸을 차지한다.
+
+- 테이블 레이아웃은 자주 사용되지 않고, 나중에 배울 위젯 중에 그리드뷰 위젯이 격자 모양으로 보여줄 수 있다.
+
+
+※스크롤뷰 
+- 추가된 뷰의 영역이 한눈에 다 보이지 않을 때 사용된다.
+
+- 이미지의 파일 이름은 대문자로 사용 불가하다.
+
+- 스코롤뷰 태그는 기본적으로 수직 방향의 스크롤을 지원하기 때문에, 수평 스크롤뷰를 사용하고 싶다면 HorizentalScrollView를 사용하면 된다.
+
+- 자기 자신의 이미지를 추가할 때 사용하는 객체 BitmapDrawable을 사용한다. 또한 getDrawable() 메소드는 Resources 객체에 정의되어 있으며
+액티비티에 정희된 getResources() 메소드를 이용하면 Resources 객체를 참조할 수 있게 된다.
+
+- 이미지뷰의 크기를 왜 설정하냐면, setImageResource()메소드나 setImageDrawable() 메소드를 사용하면 자동으로 이미지뷰의 크기에 설정되므로
+선택한 이미지 크기가 자동으로 줄여지게 되기 때문에, 우리는 getintrinsicWidth와 getintrinsicHeight를 사용하여 직접 설정해야 합니다.
+
+
+※프레임 레이아웃과 뷰의 전환
+- 프레임 레이아웃에 뷰를 넣으면 그 중에서 하나의 뷰만을 화면에 표시한다.
+
+- 스택과 비슷한 개념으로, 제일 먼저 추가한 뷰는 제일 아래에 쌓이고, 최종적으로 마지막에 쌓인 뷰가 보이게된다.
+
+
+※TextView
+- 텍스트를 보여주는 위젯으로써, 직접 텍스트를 넣을 수도 있고, /res/values 폴더 안에 들어 있는 strings.xml 파일 안에 들어가서
+설정할 수도 있다. 
+	
+	예시)
+	1. <string name = "person_name"> 이희웅 </string>를 /res/values/strings.xml에 추가
+	2. 디자인에서 텍스트뷰를 추가한 후, text 속성에 @string/person_name을 넣으면 이희웅으로 변경됨.
+
+- 문자열을 XML 레이아웃이 아닌 strings.xml 파일에 분리하여 넣어 두면 국가마다 다른 언어를 사용하거나 단말에서 다른 언어로 지정되어 있을 때도
+쉽게 여러 나라의 문자열을 표시할 수 있다.
+
+- 안드로이드에서 다국어를 지원할 때는 리소스에 공통으로 적용되는 병렬 리소스 로딩 방식을 사용한다.
+
+	예시) 
+	1. 만약 영어와 한국어를 동시에 지원하는 앱을 만들고 싶다면, res 폴더안에 두 개의 폴더를 만든 후, 그안에 strings.xml 파일을 넣어둔다.
+	2. res/values-en/string.xml  + res/values-ko/string.xml
+
+- textColor에서 속성 값은 #AARRGGBB 이다. 그리고 Alpha 값이 FF이면 불투명, 00이면 투명, 88이면 반투명을 의미한다.
+
+- textStyle의 속성은 텍스트뷰에서 표시하는 문자열의 스타일 속성을 설정한다. "normal", "bold", "italic"등의 값을 지정하며, '|'을 사용하며 여러 값을 넣을 수 있다.
+이때 앞뒤 공간의 공백이 있으면 안된다.
+
+- typeFace의 속성은 텍스트뷰에서 표시하는 문자열의 폰트를 설정한다. "normal", "sans", "serif", "monospace" 중의 하나를 지정한다.
+
+- maxLines의 텍스트뷰에서 표시하는 문자열의 최대 줄 수를 설정한다. 특히 한 줄로만 표시하고 싶을 경우에는 값을 "1"로 설정한다. 이렇게 한다면 한줄의 영역을 넘어가는
+부분은 표시되지 않는다.
+
+
+※Button
+- 사용자가 설정한 상태 값을 저장하도록 정의되어 있으며, 이 버튼 위젯에 발생하는 이벤트를 처리하기 위한 가장 간단한 방법이 OnClickListener를 정의하여 버튼에 설정하면 된다.
+
+- 체크 박스와 라디오 버튼의 경우 CompoundButton 클래스가 정의되어 있는데 이 클래스는 다음과 같은 메소드를 포함하고 있다.
+	
+	public boolean isChecked()
+	public void setChecked (boolean checked)
+	public void toggle()
+	
+	+ 체크 박스나 라디오 버튼이 선택되어 있는지를 확인하는 메소드가 isChecked()이며 코드 상에서 상태 값을 지정할 경우에는 setChecked() 메소드를 사용한다.
+	만약 상태가 바뀔 경우에는 다음과 같은 메소드가 호출된다.
+	
+	void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+	
+	+ 라디오의 버튼인 경우 하나를 선택하면 다른 것들이 해제되는 동작을 수행하여야 하므로 Radio-Group을 이용해 묶어주면 된다.
+	또한 해제할 때, clearCheck() 메소드를 사용해도 다 해제되게 할 수 있다.
+
+- 라디오 버튼의 선택 상태가 변경될 때 이벤트를 받아 처리하고자 한다면 OnCheckedChangeListener 인터페이스를 구현하고 setOnCheckedChangeListener() 메소드로 설정한다.
+
+- 버튼에 아이콘을 입힐려면 ImageButton을 사용하면 된다.
+
+
+※입력 상자
+- 에디트텍스트는 사용자의 입력을 받고자 할 때 일반적으로 사용된다.
+
+- 에디트텍스트는 입력하는 문자의 유형을 지정할 수 있는 속성을 제공한다. (inputType)
+
+- hint 속성은 간단한 안내글이며, 사용자가 클릭했을 때, 사라진다. 또한 textColorHint로 색깔을 변경할 수 있다.
+
+
+※이미지뷰
+- 이미지를 로딩하여 설정하려면 /res/drawable 폴더 밑에 이미지 파일을 복사하여 넣은 후 이미지뷰의 src 속성 값으로 이미지 파일을 지정한다.
+	형태로는 @drawable/이미지명 이다.
+
+- src 속성은 이미지를 정의할 때 반드시 설정해야한다.
+
+- maxWidth, maxHeight의 속성은 이미지가 보일 최대 크기를 설정한다. 이 속성을 설정하지 않으면 원본 이미지의 크기대로 보이게 되므로 너무 큰 이미지의 경우에는 이속성을 
+이용해 최대 크기를 제한할 수 있다.
+
+- tint 속성은 이미지뷰에 보이는 이미지 위에 색상을 적용하고 싶을 때 설정한다.
+
+- scaleType의 속성은 이미지가 원본 이미지의 크기와 다르게 화면에 보이는 경우 확대/축소를 어떤 방식으로 적용할 것인지 설정합니다. 
+fitXY, centerCrop, centerInside 등 여러 가지 값이 미리 정의되어 있으며 이 값들은 이미지 변환 알고리즘으로 필요에 따라 적절하게 적용할 수 있다.
+
+- drawable 폴더에서 화면의 해상도에 따라 서로 다른 이미지를 로딩할 수 있는 방법을 제공하는데, 이 또한 병렬 리소스 로딩 방식을 사용한다.
+즉, /res/drawable 폴더에 이미지를 넣게 되면 일반적으로 사용되는 이미지로 인식되지만, /res/drawable-hdpi에 넣으면 고해상도 화면에서 /res/drawable-mdpi에 넣은 이미지는
+중간 해상도 화면에서 자동으로 적용된다.
+
+
+※텍스트뷰와 입력상자의 다른 기능들
+- selectAllOnFocus 속성은 true로 값을 설정하면, 클릭 한번에 모든 문자열을 선택하게 된다.
+
+- cursorVisible 속성을 false로 한다면, 커서가 사라지게 된다.
+
+- 에디트텍스트를 길게 누르면 사용자가 문자열을 복사, 잘라내기 등의 작업을 할 수 있는데, 이러한 기능을 코드에서 동작하게 하려면 다음과 같은 메소드를 사용해야한다.
+	
+	public int getSelectionStart()			- 선택된 영역이 있을 때 그 시작 위치를 알려준다.
+	public int getSelectionEnd()			- 끝 위치를 알려주는데 두 개의 메소드 모두 선택 영역이 없으면 커서가 있는 현재 위치를 알려준다.
+	public void setSelection(int start, int stop)		- 선택 영역을 지정하는데 사용한다.
+	public void setSelection(int index)		- 선택 영역을 지정하는데 사용한다.
+	public void selectAll()				- 호출하면 전체 문자열이 선택된다.
+	public void extendSelection(int index)		- 선택영역을 확장하는데 사용한다.
+	
+- autoLink라는 속성은 문자열에 들어 있는 링크 정보를 자동으로 찾아 링크 색상으로 표시하고 누르면 필요한 기능을 수행할 수 있도록 한다.
+
+- 텍스트뷰를 사용하다 보면 글자가 많은 경우 줄 간격 때문에 읽기 힘든 상황이 발생하기도 합니다. 그래서 우리는 배수와 여유 값을 지정할 수 있는데 다음과 같다.
+	
+	- lineSpacingMultipler는 줄 간격을 배수로 설정할 때 사용한다.
+	- lineSpacingExtra는 여유 값으로 설정할 때 사용한다.
+
+- capitalize 속성은 문자를 대문자나 소문자로 바꾸어 표시하는 기능을 제공한다. 보통 "characters", "words", "sentences" 등이 될 수 있다. 이렇게 설정한다면
+글자, 단어, 문장 단위로 맨 앞 글자를 대문자로 표시해준다.
+
+- ellipsize 속성은 텍스트뷰가 한 줄로 되어있는데 이 줄을 넘어가는 텍스트가 설정되어 있으면 이 문자열의 뒷 부분은 잘리고 "..."으로 표시된다. 
+그래서 이 속성의 값은 "start", "middle", "end" 값이 있다. 또한 텍스트뷰를 한 줄로 표시할 때는 maxLines를 사용한다.
+
+- 에디트텍스트에 입력되어 있는 문자열을 편집하지 못하게 하고 싶다면 editable 속성 값을 "false"로 설정하면 된다.
+
+- 에디트텍스트에 입력된 문자를 확인하거나 입력된 문자가 필요한 포맷과 맞는지 확인하기 위해서는 getText() 메소드를 사용한다. 이 메소드가 리턴하는 것은 Editable 객체인데
+이 객체의 toString() 메소드를 이용하면 일반 String 타입의 문자열을 확인할 수 있다.
+
+- 만약 문자열이 사용자의 입력에 의해 바뀔 때마다 확인하는 기능을 넣고 싶다면 TextChangedListener를 사용할 수 있다.
+	
+	public void addTextChagedListener(TextWatcher watcher)
+	
+	+ addTextChagedListener() 메소드를 이용하면 TextWatcher 객체를 설정할 수 있는데 이객체는 텍스트가 변결될 때마다 발생하는 이벤트를 처리할 수 있다.
+	TextWatcher 인터페이스에는 다음과 같은 메소드들이 정의되어 있다.
+	
+	public void beforeTextChagedListener(CharSequence s, int start, int count, int after)
+	public void afterTextChagedListener(Editable s)
+	public void onTextChagedListener(CharSequence s, int start, int before, int count)
+	
+	+ 만약 입력된 문자열의 길이 값을 확인할 때는 setFilters() 메소드를 이용해 InputFilter 객체를 파라미터로 전달하고 이 객체의 LengthFilter() 메소드를 호출하면
+	입력된 문자열의 길이 값을 설정할 수 있다.
+
+	+ 예시로는 SMS는 80바이트까지만 전송 가능하므로 사용자가 몇 글자 입력했는지 바로바로 표시해 주고 싶을 때 이 클래스를 사용한다.
