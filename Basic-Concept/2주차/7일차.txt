@@ -1,0 +1,49 @@
+※ 프래그먼트 
+
+- FragmentManager 객체는 프래그먼트를 액티비티에 추가, 다른 프래그먼트로 바꾸거나, 삭제할 떄 주로 사용할 수 있으며, getFragmentManager() 메서드를 호출하면 참조할 수 있다.
+
+	+ getSupportFragmentManager() 메소드가 getFragmentManager() 메서드와 같은 기능을 하지만, getSupportFragmentManager() 메소드를 더 권장한다. 그 이유는 예전 버전까지 호환되도록 하기 때문이다.
+
+
+- 큰 화면과 해상도를 가진 태블릿의 경우에 더욱 유용하게 사용될 수 있다.
+
+	+ 뷰 특성: 뷰 그룹에 추가되거나 레이아웃의 일부가 될 수 있다.
+	
+	+ 액티비티 특성: 액티비티처럼 수명주기를 가지고 있다.
+
+
+- 프래그먼트를 만들어 사용하는 과정을 간단하게 정리하면 다음과 같다.
+
+	1. 프래그먼트를 위한 xml 레이아웃 만들기
+
+	2. 프래그먼트 클래스 만들기
+
+	3. 액티비티를 xml 레이아웃에 추가하기
+
+
+- 우리가 getSupportFragmentManager()의 메서드를 사용하면 좋은 점은 추가, 삭제, 교체가 될 수 있는데, 만약 변경 중에 오류가 발생하면 다시 원래 상태로 돌아가야 하므로, beginTransaction()을 사용 후, commit을 사용해야한다.
+
+	+ getSupportFragmentManager().beginTransaction().replace().commit();
+
+
+- 프래그먼트의 수명주기는 다음과 같다. 자세한 설명은 303p~304p를 참고한다.
+
+	+ onAttach() -> onCreate()
+
+	+ onCreate()는 new 연산자를 이용해 새로운 프래그먼트 객체를 만드는 시점이 아니라는 점에 주의해야한다.
+
+	+ onCreateView() 메서드는 프래그먼트와 관련되는 뷰들의 계층도를 구성하는 과정에서 호출된다.
+
+	+ 액티비티가 메모리에 처음 만들어질 때는 액티비티의 onCreate() 메서드가 호출되지만 프래그먼트의 경우에는 onActivityCreated() 메서드가 호출된다.
+
+	+ onDestoryView() 프래그먼트와 관련된 뷰 리소스를 해제할 수 있도록 호출한다.
+
+
+- 액티비티에 프래그먼트를 추가하는 수명주기 과정은 다음과 같다.
+
+	+ onAttach() --> onCreate() --> onCreateView() --> onActivityCreated() --> onStart() --> onResume() --> 프래그먼트 활성화(액티비티 화면에 보이는 상태)
+
+
+- 액티비티에서 프래그먼트 제거
+
+	+ 프래그먼트 활성화(액티비티 화면에 보이는 상태) --> onPause() --> onStop() --> onDestoryView() --> onDestory() --> onDetach()
