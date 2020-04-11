@@ -1,0 +1,20 @@
+public class LayoutCodeActivity extends AppCompatActivity{
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        LinearLayout mainLayout = new LinearLayout(this);	//this는 context 객체이며, AppCompatActivity클래스는 context를 상속한다.
+        mainLayout.setOrientation(LinearLayout.VERTICAL);
+
+        LinearLayout.LayoutParams params =
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        Button button01 = new Button(this);
+        button01.setText("Buttton 01");
+        button01.setLayoutParams(params);
+        mainLayout.addView(button01);
+
+        setContentView(mainLayout);
+    }
+}
