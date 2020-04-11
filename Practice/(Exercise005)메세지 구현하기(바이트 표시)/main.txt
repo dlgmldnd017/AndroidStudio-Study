@@ -1,0 +1,73 @@
+package teachtown.org;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import static java.lang.Thread.sleep;
+
+public class MainActivity extends AppCompatActivity {
+    EditText view1;
+    TextView view2;
+    int currentByte;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        view1 = (EditText) findViewById(R.id.view1);
+        view2 = (TextView) findViewById(R.id.view2);
+
+        view1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                InputFilter[] filter = new InputFilter[1];
+                filter[0] = new InputFilter.LengthFilter(80);
+                view1.setFilters(filter);
+
+                currentByte = s.toString().getBytes().length;
+                String txt = String.valueOf(currentByte +"바이트/80바이트");
+                view2.setText(txt);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+    }
+
+    public void on1(View v) throws InterruptedException {
+        int i =0;
+        if(currentByte == 0){
+            Toast.makeText(getApplicationContext(),"내용물이 없습니다. 다시 확인하세요." ,Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(getApplicationContext(),(CharSequence)view1.getText() ,Toast.LENGTH_LONG).show();
+            i++;
+        }
+        if(i==1){
+            sleep(1000);
+            //Toast.makeText(getApplicationContext(),"보내기 완료" ,Toast.LENGTH_LONG).show();
+
+        }
+        view1.setText("");
+        view1.setHint("여기에 입력해주세요");
+    }
+
+    public void on2(View v){
+        Toast.makeText(getApplicationContext(),"클리어" ,Toast.LENGTH_LONG).show();
+        view1.setText("");
+        view1.setHint("여기에 입력해주세요");
+    }
+}
