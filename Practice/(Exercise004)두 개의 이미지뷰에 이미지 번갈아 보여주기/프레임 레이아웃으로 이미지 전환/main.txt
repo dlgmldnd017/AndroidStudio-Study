@@ -1,0 +1,40 @@
+package teachtown.org;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
+public class MainActivity extends AppCompatActivity {
+    ImageView image1;
+    ImageView image2;
+    int imageindex = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        image1 = (ImageView) findViewById(R.id.imageView);
+        image2 = (ImageView) findViewById(R.id.imageView2);
+    }
+
+    public void onButton1Clicked(View v){
+        changeImage();
+    }
+
+    private void changeImage(){
+        if(imageindex == 0) {
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.INVISIBLE);
+
+            imageindex = 1;
+        }else if(imageindex == 1){
+            image1.setVisibility(View.INVISIBLE);
+            image2.setVisibility(View.VISIBLE);
+
+            imageindex = 0;
+        }
+    }
+}
