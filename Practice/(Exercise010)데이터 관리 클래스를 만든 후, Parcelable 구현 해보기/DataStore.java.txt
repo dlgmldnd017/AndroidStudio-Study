@@ -1,0 +1,40 @@
+package com.example.exercise010;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class DataStore implements Parcelable {
+    int num;
+    String msg;
+
+    public DataStore(int num, String msg){
+        this.num = num;
+        this.msg = msg;
+    }
+
+    public DataStore(Parcel src){
+        num = src.readInt();
+        msg = src.readString();
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator(){
+        @Override
+        public DataStore createFromParcel(Parcel source) {
+            return new DataStore(source);
+        }
+
+        public DataStore[] newArray(int size){
+            return new DataStore[size];
+        }
+    };
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(num);
+        dest.writeString(msg);
+    }
+}
