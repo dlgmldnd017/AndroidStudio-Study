@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">스마트 창문</string>
-    <string name="title_home">홈</string>
-    <string name="title_alarm">알람</string>
-    <string name="title_deviceSetting">디바이스 설정</string>
-    <string name="title_setting">앱 설정</string>
-    <string name="title_WindowAdd">디바이스 추가하기</string>
-</resources>
-
